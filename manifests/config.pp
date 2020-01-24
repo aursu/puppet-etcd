@@ -14,7 +14,6 @@ class etcd::config (
   String  $etcdserver_key             = $etcd::etcdserver_key,
   String  $etcdpeer_crt               = $etcd::etcdpeer_crt,
   String  $etcdpeer_key               = $etcd::etcdpeer_key,
-  Array   $etcd_peers                 = $etcd::etcd_peers,
   String  $etcd_hostname              = $etcd::etcd_hostname,
   String  $etcd_ip                    = $etcd::etcd_ip,
   String  $etcd_initial_cluster       = $etcd::etcd_initial_cluster,

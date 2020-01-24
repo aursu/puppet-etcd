@@ -36,14 +36,6 @@
 #   Or to pin explicitly to a specific interface kubernetes::etcd_ip: "%{::ipaddress_enp0s8}"
 #   Defaults to undef
 #
-# [*etcd_peers*]
-#   This will tell etcd how the list of peers to connect to into the cluster.
-#   An example with hiera would be kubernetes::etcd_peers:
-#                                  - 172.17.10.101
-#                                  - 172.17.10.102
-#                                  - 172.17.10.103
-#   Defaults to undef
-#
 # [*etcd_initial_cluster*]
 #    This will tell etcd how many nodes will be in the cluster and is passed as a string.
 #   An example with hiera would be kubernetes::etcd_initial_cluster: etcd-kube-master=http://172.17.10.101:2380,etcd-kube-replica-master-01=http://172.17.10.210:2380,etcd-kube-replica-master-02=http://172.17.10.220:2380
@@ -93,8 +85,6 @@ class etcd (
           $etcd_hostname              = $facts['hostname'],
   Optional[String]
           $etcd_ip                    = undef,
-  Optional[Array]
-          $etcd_peers                 = undef,
   Optional[String]
           $etcd_initial_cluster       = undef,
   Optional[Enum['new', 'existing']]
