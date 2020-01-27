@@ -7,6 +7,4 @@ class etcd::service {
     ensure => running,
     enable => true,
   }
-
-  File <| path == '/etc/default/etcd' |> ~> Service['etcd']
 }

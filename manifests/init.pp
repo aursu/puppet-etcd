@@ -110,5 +110,5 @@ class etcd (
 
   Class['etcd::packages']
     -> Class['etcd::config']
-    -> Class['etcd::service']
+    ~> Class['etcd::service']
 }
