@@ -1,17 +1,29 @@
 ETCD_NAME="<%= @etcd_hostname %>"
 ETCD_DATA_DIR="/var/lib/etcd"
-ETCD_LISTEN_PEER_URLS="https://<%= @etcd_ip %>:2380"
+<% if @etcdserver_crt && @etcdserver_key -%>
 ETCD_LISTEN_CLIENT_URLS="https://<%= @etcd_ip %>:2379"
-ETCD_INITIAL_ADVERTISE_PEER_URLS="https://<%= @etcd_ip %>:2380"
-ETCD_INITIAL_CLUSTER="<%= @etcd_initial_cluster %>"
-ETCD_INITIAL_CLUSTER_STATE="new"
-ETCD_INITIAL_CLUSTER_TOKEN="my-etcd-token"
 ETCD_ADVERTISE_CLIENT_URLS="https://<%= @etcd_ip %>:2379"
 ETCD_CERT_FILE="/etc/kubernetes/pki/etcd/server.crt"
 ETCD_KEY_FILE="/etc/kubernetes/pki/etcd/server.key"
-ETCD_CLIENT_CERT_AUTH=1
-ETCD_TRUSTED_CA_FILE="/etc/kubernetes/pki/etcd/ca.crt"
+<% else -%>
+ETCD_LISTEN_CLIENT_URLS="http://<%= @etcd_ip %>:2379"
+ETCD_ADVERTISE_CLIENT_URLS="http://<%= @etcd_ip %>:2379"
+<% end -%>
+<% if @etcdpeer_crt && @etcdpeer_key -%>
+ETCD_LISTEN_PEER_URLS="https://<%= @etcd_ip %>:2380"
+ETCD_INITIAL_ADVERTISE_PEER_URLS="https://<%= @etcd_ip %>:2380"
 ETCD_PEER_CERT_FILE="/etc/kubernetes/pki/etcd/peer.crt"
 ETCD_PEER_KEY_FILE="/etc/kubernetes/pki/etcd/peer.key"
+<% else -%>
+ETCD_LISTEN_PEER_URLS="http://<%= @etcd_ip %>:2380"
+ETCD_INITIAL_ADVERTISE_PEER_URLS="http://<%= @etcd_ip %>:2380"
+<% end -%>
+ETCD_INITIAL_CLUSTER="<%= @etcd_initial_cluster %>"
+ETCD_INITIAL_CLUSTER_STATE="<%= @etcd_initial_cluster_state %>"
+ETCD_INITIAL_CLUSTER_TOKEN="<%= @etcd_initial_cluster_token %>"
+<% if @etcd_ca_crt -%>
+ETCD_CLIENT_CERT_AUTH=1
+ETCD_TRUSTED_CA_FILE="/etc/kubernetes/pki/etcd/ca.crt"
 ETCD_PEER_CLIENT_CERT_AUTH=1
 ETCD_PEER_TRUSTED_CA_FILE="/etc/kubernetes/pki/etcd/ca.crt"
+<% end -%>

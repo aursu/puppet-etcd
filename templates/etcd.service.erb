@@ -13,20 +13,32 @@ TimeoutStartSec=0
 
 ExecStart=/usr/local/bin/etcd --name <%= @etcd_hostname %> \
     --data-dir /var/lib/etcd \
+<% if @etcdserver_crt && @etcdserver_key -%>
     --listen-client-urls https://<%= @etcd_ip %>:2379 \
     --advertise-client-urls https://<%= @etcd_ip %>:2379 \
-    --listen-peer-urls https://<%= @etcd_ip %>:2380 \
-    --initial-advertise-peer-urls https://<%= @etcd_ip %>:2380 \
     --cert-file=/etc/kubernetes/pki/etcd/server.crt \
     --key-file=/etc/kubernetes/pki/etcd/server.key \
-    --client-cert-auth \
-    --trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt \
+<% else -%>
+    --listen-client-urls http://<%= @etcd_ip %>:2379 \
+    --advertise-client-urls http://<%= @etcd_ip %>:2379 \
+<% end -%>
+<% if @etcdpeer_crt && @etcdpeer_key -%>
+    --listen-peer-urls https://<%= @etcd_ip %>:2380 \
+    --initial-advertise-peer-urls https://<%= @etcd_ip %>:2380 \
     --peer-cert-file=/etc/kubernetes/pki/etcd/peer.crt \
     --peer-key-file=/etc/kubernetes/pki/etcd/peer.key \
+<% else -%>
+    --listen-peer-urls http://<%= @etcd_ip %>:2380 \
+    --initial-advertise-peer-urls http://<%= @etcd_ip %>:2380 \
+<% end -%>
+<% if @etcd_ca_crt -%>
+    --client-cert-auth \
+    --trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt \
     --peer-client-cert-auth \
     --peer-trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt \
+<% end -%>
     --initial-cluster <%= @etcd_initial_cluster %> \
-    --initial-cluster-token my-etcd-token \
+    --initial-cluster-token <%= @etcd_initial_cluster_token %> \
     --initial-cluster-state <%= @etcd_initial_cluster_state %>
 
 [Install]
