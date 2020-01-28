@@ -6,3 +6,6 @@ fixtures:
     archive:
       repo: "puppet/archive"
       ref: "4.4.0"
+    systemd:
+      repo: "camptocamp/systemd"
+      ref: "2.8.0"

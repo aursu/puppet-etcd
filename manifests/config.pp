@@ -26,6 +26,8 @@ class etcd::config (
   String  $etcd_version               = $etcd::etcd_version,
 )
 {
+  include systemd::systemctl::daemon_reload
+
   $kube_dirs = ['/etc/kubernetes', '/etc/kubernetes/pki', '/etc/kubernetes/pki/etcd']
 
   $etcd = {
@@ -59,6 +61,7 @@ class etcd::config (
     file { '/etc/systemd/system/etcd.service':
       ensure  => present,
       content => template('etcd/etcd.service.erb'),
+      notify  => Class['systemd::systemctl::daemon_reload'],
     }
   } else {
     file { '/etc/default/etcd':
