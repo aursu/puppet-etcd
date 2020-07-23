@@ -77,7 +77,7 @@
 class etcd (
   String  $etcd_initial_cluster_token = 'my-etcd-token',
   Optional[String]
-          $etcd_version               = '3.3.18',
+          $etcd_version               = '3.4.10',
   Optional[String]
           $etcd_hostname              = $facts['hostname'],
   Optional[String]
@@ -102,6 +102,8 @@ class etcd (
   String  $etcd_package_name          = 'etcd-server',
   String  $etcd_source                = "https://github.com/coreos/etcd/releases/download/v${etcd_version}/${etcd_archive}",
   String  $etcd_install_method        = 'wget',
+  Boolean $listen_metrics_urls        = false,
+  Integer $snapshot_count             = 0,
 )
 {
   include etcd::packages

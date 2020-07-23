@@ -24,6 +24,8 @@ class etcd::config (
   String  $etcd_initial_cluster_state = $etcd::etcd_initial_cluster_state,
   String  $etcd_initial_cluster_token = $etcd::etcd_initial_cluster_token,
   String  $etcd_version               = $etcd::etcd_version,
+  Boolean $listen_metrics_urls        = $etcd::listen_metrics_urls,
+  Integer $snapshot_count             = $etcd::snapshot_count,
 )
 {
   include systemd::systemctl::daemon_reload

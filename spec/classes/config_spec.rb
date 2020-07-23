@@ -30,37 +30,37 @@ describe 'etcd::config' do
 
       it {
         is_expected.to contain_file('/etc/systemd/system/etcd.service')
-          .with_content(%r{^ExecStart=/usr/local/bin/etcd --name controller})
+          .with_content(%r{^ExecStart=/usr/local/bin/etcd --name=controller})
       }
 
       it {
         is_expected.to contain_file('/etc/systemd/system/etcd.service')
-          .with_content(%r{--listen-client-urls http://10.0.0.11:2379})
+          .with_content(%r{--listen-client-urls=http://127.0.0.1:2379,http://10.0.0.11:2379})
       }
 
       it {
         is_expected.to contain_file('/etc/systemd/system/etcd.service')
-          .with_content(%r{--listen-peer-urls http://10.0.0.11:2380})
+          .with_content(%r{--listen-peer-urls=http://10.0.0.11:2380})
       }
 
       it {
         is_expected.to contain_file('/etc/systemd/system/etcd.service')
-          .with_content(%r{--initial-cluster controller=http://10.0.0.11:2380})
+          .with_content(%r{--initial-cluster=controller=http://10.0.0.11:2380})
       }
 
       it {
         is_expected.to contain_file('/etc/systemd/system/etcd.service')
-          .with_content(%r{--initial-cluster-token my-etcd-token})
+          .with_content(%r{--initial-cluster-token=my-etcd-token})
       }
 
       it {
         is_expected.to contain_file('/etc/systemd/system/etcd.service')
-          .with_content(%r{--initial-cluster-state new})
+          .with_content(%r{--initial-cluster-state=new})
       }
 
       it {
         is_expected.to contain_file('/etc/systemd/system/etcd.service')
-          .without_content(%r{--client-cert-auth})
+          .without_content(%r{--client-cert-auth=true})
       }
     end
   end
