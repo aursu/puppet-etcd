@@ -113,4 +113,6 @@ class etcd (
   Class['etcd::packages']
     -> Class['etcd::config']
     ~> Class['etcd::service']
+
+  # TODO: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/setup-ha-etcd-with-kubeadm/
 }
