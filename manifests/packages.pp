@@ -15,7 +15,7 @@ class etcd::packages (
       path            => "/${etcd_archive}",
       source          => $etcd_source,
       extract         => true,
-      extract_command => 'tar xfz %s --strip-components=1 -C /usr/local/bin/',
+      extract_command => 'tar xf %s --strip-components=1 -C /usr/local/bin/',
       extract_path    => '/usr/local/bin',
       cleanup         => true,
       creates         => ['/usr/local/bin/etcd', '/usr/local/bin/etcdctl']
