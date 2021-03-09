@@ -77,7 +77,7 @@
 class etcd (
   String  $etcd_initial_cluster_token = 'my-etcd-token',
   Optional[String]
-          $etcd_version               = '3.4.10',
+          $etcd_version               = '3.4.15',
   Optional[String]
           $etcd_hostname              = $facts['hostname'],
   Optional[String]
@@ -98,9 +98,9 @@ class etcd (
           $etcdpeer_crt               = undef,
   Optional[String]
           $etcdpeer_key               = undef,
-  String  $etcd_archive               = "etcd-v${etcd_version}-linux-amd64.tar.gz",
+  String  $etcd_archive               = "etcd-v${etcd_version}-linux-amd64.tar",
   String  $etcd_package_name          = 'etcd-server',
-  String  $etcd_source                = "https://github.com/coreos/etcd/releases/download/v${etcd_version}/${etcd_archive}",
+  String  $etcd_source                = "https://github.com/etcd-io/etcd/releases/download/v${etcd_version}/${etcd_archive}",
   String  $etcd_install_method        = 'wget',
   Boolean $listen_metrics_urls        = false,
   Integer $snapshot_count             = 0,
