@@ -75,44 +75,22 @@
 #   Defaults to undef
 #
 class etcd (
-  String  $etcd_initial_cluster_token = 'my-etcd-token',
-  Optional[String]
-          $etcd_version               = '3.4.15',
-  Optional[String]
-          $etcd_hostname              = $facts['hostname'],
-  Optional[String]
-          $etcd_ip                    = undef,
-  Optional[String]
-          $etcd_initial_cluster       = undef,
-  Optional[Enum['new', 'existing']]
-          $etcd_initial_cluster_state = 'new',
-  Optional[String]
-          $etcd_ca_key                = undef,
-  Optional[String]
-          $etcd_ca_crt                = undef,
-  Optional[String]
-          $etcdserver_crt             = undef,
-  Optional[String]
-          $etcdserver_key             = undef,
-  Optional[String]
-          $etcdpeer_crt               = undef,
-  Optional[String]
-          $etcdpeer_key               = undef,
-  String  $etcd_archive               = "etcd-v${etcd_version}-linux-amd64.tar",
-  String  $etcd_package_name          = 'etcd-server',
-  String  $etcd_source                = "https://github.com/etcd-io/etcd/releases/download/v${etcd_version}/${etcd_archive}",
-  String  $etcd_install_method        = 'wget',
-  Boolean $listen_metrics_urls        = false,
-  Integer $snapshot_count             = 0,
-)
-{
-  include etcd::packages
-  include etcd::config
-  include etcd::service
-
-  Class['etcd::packages']
-    -> Class['etcd::config']
-    ~> Class['etcd::service']
-
-  # TODO: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/setup-ha-etcd-with-kubeadm/
-}
+  String $etcd_initial_cluster_token = 'my-etcd-token',
+  String $etcd_version = '3.5.9',
+  Enum['new', 'existing'] $etcd_initial_cluster_state = 'new',
+  String $etcd_hostname = $facts['networking']['hostname'],
+  Optional[String] $etcd_ip = undef,
+  Optional[String] $etcd_initial_cluster = undef,
+  Optional[String] $etcd_ca_key = undef,
+  Optional[String] $etcd_ca_crt = undef,
+  Optional[String] $etcdserver_crt = undef,
+  Optional[String] $etcdserver_key = undef,
+  Optional[String] $etcdpeer_crt = undef,
+  Optional[String] $etcdpeer_key = undef,
+  String $etcd_archive = "etcd-v${etcd_version}-linux-amd64.tar",
+  String $etcd_package_name = 'etcd-server',
+  String $etcd_source = "https://github.com/etcd-io/etcd/releases/download/v${etcd_version}/${etcd_archive}",
+  String $etcd_install_method = 'wget',
+  Boolean $listen_metrics_urls = false,
+  Integer $snapshot_count = 0,
+) {}

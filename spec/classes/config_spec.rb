@@ -8,7 +8,7 @@ describe 'etcd::config' do
       let(:facts) do
         os_facts.merge(
           stype: 'openstack',
-          hostname: 'controller',
+          networking: os_facts[:networking].merge('hostname' => 'controller'),
         )
       end
 
