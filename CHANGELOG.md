@@ -30,3 +30,17 @@ All notable changes to this project will be documented in this file.
 * Bugfix: remove gzip flag for .tar archive
 
 **Known Issues**
+
+## Release 0.2.0
+
+**Features**
+
+* PDK upgrade to 3.0.0
+* Added `params` and `globals` classes
+* Added `etcd::install` Bolt plan
+
+**Bugfixes**
+
+* Removed dependency on `systemd` module
+
+**Known Issues**

@@ -1,6 +1,6 @@
 {
   "name": "aursu-etcd",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "author": "aursu",
   "summary": "etcd key-value store management",
   "license": "Apache-2.0",
