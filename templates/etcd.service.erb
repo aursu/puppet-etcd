@@ -10,27 +10,27 @@ RestartSec=5s
 LimitNOFILE=40000
 TimeoutStartSec=0
 
-ExecStart=/usr/local/bin/etcd --name=<%= @etcd_hostname %> \
+ExecStart=/usr/local/bin/etcd --name=<%= @hostname %> \
     --data-dir=/var/lib/etcd \
-<% if @etcdserver_crt && @etcdserver_key -%>
-    --listen-client-urls=https://127.0.0.1:2379,https://<%= @etcd_ip %>:2379 \
-    --advertise-client-urls=https://<%= @etcd_ip %>:2379 \
+<% if @server_crt && @server_key -%>
+    --listen-client-urls=https://127.0.0.1:2379,https://<%= @ipaddr %>:2379 \
+    --advertise-client-urls=https://<%= @ipaddr %>:2379 \
     --cert-file=/etc/kubernetes/pki/etcd/server.crt \
     --key-file=/etc/kubernetes/pki/etcd/server.key \
 <% else -%>
-    --listen-client-urls=http://127.0.0.1:2379,http://<%= @etcd_ip %>:2379 \
-    --advertise-client-urls=http://<%= @etcd_ip %>:2379 \
+    --listen-client-urls=http://127.0.0.1:2379,http://<%= @ipaddr %>:2379 \
+    --advertise-client-urls=http://<%= @ipaddr %>:2379 \
 <% end -%>
-<% if @etcdpeer_crt && @etcdpeer_key -%>
-    --listen-peer-urls=https://<%= @etcd_ip %>:2380 \
-    --initial-advertise-peer-urls=https://<%= @etcd_ip %>:2380 \
+<% if @peer_crt && @peer_key -%>
+    --listen-peer-urls=https://<%= @ipaddr %>:2380 \
+    --initial-advertise-peer-urls=https://<%= @ipaddr %>:2380 \
     --peer-cert-file=/etc/kubernetes/pki/etcd/peer.crt \
     --peer-key-file=/etc/kubernetes/pki/etcd/peer.key \
 <% else -%>
-    --listen-peer-urls=http://<%= @etcd_ip %>:2380 \
-    --initial-advertise-peer-urls=http://<%= @etcd_ip %>:2380 \
+    --listen-peer-urls=http://<%= @ipaddr %>:2380 \
+    --initial-advertise-peer-urls=http://<%= @ipaddr %>:2380 \
 <% end -%>
-<% if @etcd_ca_crt -%>
+<% if @ca_crt -%>
     --client-cert-auth=true \
     --trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt \
     --peer-client-cert-auth=true \
@@ -42,9 +42,9 @@ ExecStart=/usr/local/bin/etcd --name=<%= @etcd_hostname %> \
 <% if @snapshot_count > 0 -%>
     --snapshot-count=<%= @snapshot_count %> \
 <% end -%>
-    --initial-cluster=<%= @etcd_initial_cluster %> \
-    --initial-cluster-token=<%= @etcd_initial_cluster_token %> \
-    --initial-cluster-state=<%= @etcd_initial_cluster_state %>
+    --initial-cluster=<%= @initial_cluster %> \
+    --initial-cluster-token=<%= @initial_cluster_token %> \
+    --initial-cluster-state=<%= @initial_cluster_state %>
 
 [Install]
 WantedBy=multi-user.target
