@@ -44,3 +44,13 @@ All notable changes to this project will be documented in this file.
 * Removed dependency on `systemd` module
 
 **Known Issues**
+
+## Release 0.3.0
+
+**Features**
+
+* Added dependency on `bsys` module
+
+**Bugfixes**
+
+**Known Issues**

@@ -62,6 +62,11 @@ describe 'etcd::config' do
         is_expected.to contain_file('/etc/systemd/system/etcd.service')
           .without_content(%r{--client-cert-auth=true})
       }
+
+      it {
+        is_expected.to contain_file('/etc/systemd/system/etcd.service')
+          .that_notifies('Exec[systemd-reload-35f8a75]')
+      }
     end
   end
 end

@@ -21,6 +21,13 @@ class etcd::packages (
       cleanup         => true,
       creates         => ['/usr/local/bin/etcd', '/usr/local/bin/etcdctl', '/usr/local/bin/etcdutl'],
     }
+
+    file { ['/usr/local/bin/etcd', '/usr/local/bin/etcdctl', '/usr/local/bin/etcdutl']:
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0755',
+      require => Archive[$archive],
+    }
   } else {
     package { $package_name:
       ensure => $version,

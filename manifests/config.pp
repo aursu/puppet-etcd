@@ -20,7 +20,7 @@ class etcd::config (
   Boolean $listen_metrics_urls = $etcd::listen_metrics_urls,
   Integer $snapshot_count = $etcd::snapshot_count,
 ) inherits etcd::globals {
-  include etcd::systemctl::daemon_reload
+  include bsys::systemctl::daemon_reload
 
   $version = $etcd::globals::version
 
@@ -57,7 +57,7 @@ class etcd::config (
     file { '/etc/systemd/system/etcd.service':
       ensure  => file,
       content => template('etcd/etcd.service.erb'),
-      notify  => Class['etcd::systemctl::daemon_reload'],
+      notify  => Class['bsys::systemctl::daemon_reload'],
     }
   } else {
     file { '/etc/default/etcd':
