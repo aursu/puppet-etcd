@@ -54,3 +54,13 @@ All notable changes to this project will be documented in this file.
 **Bugfixes**
 
 **Known Issues**
+
+## Release 0.4.0
+
+**Features**
+
+* Added Bolt plan `etcd::service` to setup systemd service
+
+**Bugfixes**
+
+**Known Issues**

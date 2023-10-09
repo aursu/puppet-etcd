@@ -1,7 +1,6 @@
-# @summary Update certificate and private key
+# @summary Install ETCD daemon
 #
-# Update certificate and private key. Works only in conjuction
-# with Hiera
+# Install ETCD daemon binary
 #
 # @param targets
 #   Nodes on which ETCD packages should be installed
