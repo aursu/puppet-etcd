@@ -99,7 +99,7 @@ plan etcd::service (
       }
 
       unless $ca_crt == '/etc/kubernetes/pki/etcd/ca.crt' {
-        file { '/etc/kubernetes/pki/etcd/server.crt':
+        file { '/etc/kubernetes/pki/etcd/ca.crt':
           ensure => file,
           source => "file://${ca_crt}",
           mode   => '0600',
